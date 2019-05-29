@@ -20,6 +20,104 @@ app.set('mysql', mysql);
 //app.use('/update_patient', require('./update_patient.js'));
 app.use('/', express.static('public'));
 
+
+////auth
+//https://codeshack.io/basic-login-system-nodejs-express-mysql/
+
+app.use(bodyParser.json());
+
+//manage session for auth
+var session = require('express-session');
+app.use(session({
+  secret: 'legalese',
+  resave: true,
+  saveUninitialized: true,
+  cookie: { maxAge: 15000 }
+}));
+
+var router = express.Router();
+
+
+app.post('/authenticate', function(req, res){
+    console.log('post /authenticate');
+    var username = req.body.username;
+    var password = req.body.password;
+
+    var mysql = req.app.get('mysql');
+    var sql = "SELECT * FROM UserInfo WHERE username = ? AND password = ?";
+    var inserts = [username, password];
+    mysql.pool.query(sql, inserts, function(error, results, fields){
+          if(error){
+              res.send('danger will robinson, pls enter pw or user');
+              console.log('danger will robinson, pls enter pw or user');
+              console.log(JSON.stringify(error));
+              res.write(JSON.stringify(error));
+              res.end();
+          }
+          else if (results.length > 0) {
+            req.session.loggedin = true;
+            req.session.username = username;
+            console.log("post successment");
+            console.log(JSON.stringify(results));
+            console.log('req.session: ');
+            console.log(req.session);
+            res.redirect('/auth');
+          } else {
+            res.send('danger will robinson, wrong pw or user');
+            console.log('danger will robinson, wrong pw or user');
+          }
+          res.end();
+        });
+});
+
+app.get('/auth', function(req, res) {
+	if (req.session.loggedin) {
+		res.send('hello, ' + req.session.username + '!');
+    console.log('hello, ' + req.session.username + '!');
+	} else {
+		res.send('log in, you must');
+    console.log('log in, you must');
+	}
+	res.end();
+});
+
+//delete session
+// req.session.destroy(function(err) {
+//     //callback method
+// })
+
+
+//////end authenticate
+
+
+app.get('/createUser',function(req,res){
+  res.render('createUser');
+});
+
+
+
+app.get('/createUser', function(req, res) {
+	console.log('get /createUser');
+  if (req.session.loggedin) {
+		// res.send('hello, ' + req.session.username + '!');
+    console.log('hello, ' + req.session.username + '!');
+    // var callbackCount = 0;
+    var context = {};
+    // function complete() {
+    //   callbackCount++;
+    //   if (callbackCount >= 1) {
+        console.log('render /createUser');
+        res.render('createUser', context);
+    //   }
+    // }
+  } else {
+		console.log('log in, you must');
+    res.send('log in, you must');
+    // res.redirect('/');
+	}
+	// res.end();
+});
+
 app.use(function(req,res){
   res.status(404);
   res.render('404');
