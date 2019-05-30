@@ -18,17 +18,16 @@
 
     <br><br><br>
   </div>
-  <div id="questionCategory">
-    <form id="findQuestionCategory">
+    <form id="questionCategory" action="" method="">
         Category:
-        <select id="questionCategory" name="legalCategory">
+        <select id="questionCategorySelect" name="category" required>
+            <!-- <option value="" selected disabled>make a selection (╯°□°)╯︵ ┻━┻</option> -->
+            <option id="questionCategorySelectOption" value="dummy" name="category" selected>xyzzzz</option>
           {{#each categories}}
             <option value="{{category}}" name="{{category}}">{{category}}</option>
-          {{/each}}
+          {{/each}} -->
         </select>
       <br>
-      <input type="button" name="category" value="Find Category" onclick="getCategoryQuestions()">
-      <br><br>
+      <input type="button" value="Find Category" onclick="getCategoryQuestions()">
     </form>
-  </div>
 </div>
