@@ -70,7 +70,7 @@ app.post('/authenticate', function(req, res){
         });
 });
 
-app.get('/auth', function(req, res) {
+app.get('/userMainPage', function(req, res) {
 	if (req.session.loggedin) {
 		res.send('hello, ' + req.session.username + '!');
     console.log('hello, ' + req.session.username + '!');
