@@ -61,10 +61,12 @@ app.post('/authenticate', function(req, res){
             console.log(JSON.stringify(results));
             console.log('req.session: ');
             console.log(req.session);
+            console.log('req.session.id: ' + req.session.id)
             res.redirect('/auth');
           } else {
             res.send('danger will robinson, wrong pw or user');
             console.log('danger will robinson, wrong pw or user');
+            console.log('req.session.id: ' + req.session.id)
           }
           res.end();
         });
@@ -74,9 +76,11 @@ app.get('/auth', function(req, res) {
 	if (req.session.loggedin) {
 		res.send('hello, ' + req.session.username + '!');
     console.log('hello, ' + req.session.username + '!');
+    console.log('req.session.id: ' + req.session.id)
 	} else {
 		res.send('log in, you must');
     console.log('log in, you must');
+    console.log('req.session.id: ' + req.session.id)
 	}
 	res.end();
 });
@@ -88,12 +92,6 @@ app.get('/auth', function(req, res) {
 
 
 //////end authenticate
-
-
-app.get('/createUser',function(req,res){
-  res.render('createUser');
-});
-
 
 
 app.get('/createUser', function(req, res) {
@@ -111,6 +109,7 @@ app.get('/createUser', function(req, res) {
     //   }
     // }
   } else {
+    console.log('req.session.id: ' + req.session.id)
 		console.log('log in, you must');
     // res.send('log in, you must');
     res.redirect('/');
