@@ -61,7 +61,7 @@ app.post('/authenticate', function(req, res){
             console.log(JSON.stringify(results));
             console.log('req.session: ');
             console.log(req.session);
-            res.redirect('/auth');
+            res.redirect('/userMainPage');
           } else {
             res.send('danger will robinson, wrong pw or user');
             console.log('danger will robinson, wrong pw or user');
