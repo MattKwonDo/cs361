@@ -81,13 +81,6 @@ app.post('/authenticate', function(req, res){
 
 
 
-//create a user
-app.get('/createUser',function(req,res){
-  res.render('createUser');
-});
-
-
-
 app.get('/createUser', function(req, res) {
 	console.log('get /createUser');
   if (req.session.loggedin) {
@@ -128,28 +121,50 @@ app.get('/userMainPage', function(req, res) {
 //question page after "ask a question"
 app.get('/questionMain', function(req, res) {
 	console.log('get /questionMain');
-  if (req.session.loggedin) {
+  // if (req.session.loggedin) {
     console.log('hello, ' + req.session.username + '!');
     	var context = {};
       context.jsscripts = ["getCategoryQuestions.js"];
+    	// var mysql = req.app.get('mysql');
+    	// var sql = "SELECT category FROM QuestionAnswer GROUP BY category";
+    	// mysql.pool.query(sql, function(error, results, fields) {
+    	// 	if(error) {
+    	// 		console.log("Error")
+    	// 		res.write(JSON.stringify(error));
+    	// 		res.end();
+    	// 	} else {
+    	// 		context.categories = results;
+    	// 	}
+        console.log('render /questionMain');
+        res.render('questionMain', context);
+      // })
+  // }
+  // else {
+	// 	console.log('log in, you must');
+  //   res.redirect('/');
+	// }
+});
+
+
+router.get('/questionMain/filter/:category', function(req, res) {
+    console.log('get /questionMain/filter/:category');
+    console.log('req: '+ req);
+    	var context = {};
+      var inserts = document.getElementById('questionCategory');
     	var mysql = req.app.get('mysql');
-    	var sql = "SELECT category FROM QuestionAnswer GROUP BY category";
+    	var sql = "SELECT question FROM QuestionAnswer WHERE category = ?";
     	mysql.pool.query(sql, function(error, results, fields) {
     		if(error) {
     			console.log("Error")
     			res.write(JSON.stringify(error));
     			res.end();
     		} else {
-    			context.categories = results;
+          console.log('results: '+ results);
+    			context.questions = results;
+          // res.redirect('/questionMain');
+          res.render('questionMain', context);
     		}
-        console.log('render /questionMain');
-        res.render('questionMain', context);
       })
-  }
-  else {
-		console.log('log in, you must');
-    res.redirect('/');
-	}
 });
 
 
