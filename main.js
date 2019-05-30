@@ -130,28 +130,27 @@ app.get('/questionMain', function(req, res) {
 	console.log('get /questionMain');
   if (req.session.loggedin) {
     console.log('hello, ' + req.session.username + '!');
-	var context = {};
-	var mysql = req.app.get('mysql');
-	var sql = "SELECT category FROM QuestionAnswer GROUP BY category";
-	mysql.pool.query(sql, function(error, results, fields) {
-		if(error) {
-			console.log("Error")
-			res.write(JSON.stringify(error));
-			res.end();
-		} else {
-			context.categories = results;
-		}
+    	var context = {};
+      context.jsscripts = ["getCategoryQuestions.js"];
+    	var mysql = req.app.get('mysql');
+    	var sql = "SELECT category FROM QuestionAnswer GROUP BY category";
+    	mysql.pool.query(sql, function(error, results, fields) {
+    		if(error) {
+    			console.log("Error")
+    			res.write(JSON.stringify(error));
+    			res.end();
+    		} else {
+    			context.categories = results;
+    		}
         console.log('render /questionMain');
         res.render('questionMain', context);
-  } else {
+      })
+  }
+  else {
 		console.log('log in, you must');
     res.redirect('/');
 	}
 });
-
-
-
-
 
 
 app.use(function(req,res){
