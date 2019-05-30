@@ -70,16 +70,6 @@ app.post('/authenticate', function(req, res){
         });
 });
 
-//app.get('/userMainPage', function(req, res) {
-//	if (req.session.loggedin) {
-//		res.send('hello, ' + req.session.username + '!');
-//    console.log('hello, ' + req.session.username + '!');
-//	} else {
-//		res.send('log in, you must');
-//    console.log('log in, you must');
-//	}
-//	res.end();
-});
 
 //delete session
 // req.session.destroy(function(err) {
