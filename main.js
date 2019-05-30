@@ -112,8 +112,8 @@ app.get('/createUser', function(req, res) {
     // }
   } else {
 		console.log('log in, you must');
-    res.send('log in, you must');
-    // res.redirect('/');
+    // res.send('log in, you must');
+    res.redirect('/');
 	}
 	// res.end();
 });
