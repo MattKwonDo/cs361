@@ -123,6 +123,20 @@ app.get('/userMainPage', function(req, res) {
 });
 
 
+app.get('/questionMain', function(req, res) {
+	console.log('get /questionMain');
+  if (req.session.loggedin) {
+    console.log('hello, ' + req.session.username + '!');
+    var context = {};
+        console.log('render /questionMain');
+        res.render('questionMain', context);
+  } else {
+		console.log('log in, you must');
+    res.redirect('/');
+	}
+});
+
+
 
 app.use(function(req,res){
   res.status(404);
