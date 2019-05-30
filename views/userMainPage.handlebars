@@ -1,14 +1,40 @@
-<!doctype html>
-<html>
-<head>
-	<title>Closing the Justice Gap</title>
-	<link rel="stylesheet" href="/css/styles.css">
-    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-    {{#each jsscripts}}
-    <script src="/static/{{this}}"></script>
-    {{/each}}
-</head>
-<body>
-	{{{body}}}
-</body>
-</html>
+<div id="UserHomeTopRow">
+  <div id="MenuIcon">
+  <h1>Menu</h1>
+  </div>
+  <div id="UserHomeTitle">
+    <h1>User Home Page</h1>
+  </div>
+  <div id="Logout">
+    <a href="">Logout</a>
+  </div>
+
+</div>
+<br/><br/>
+
+<div id="ClaimsList">
+  <h2 id="ClaimsListHeader">Current Claims List</h2>
+  <div>
+    <table id="ClaimTable">
+      <tr>
+        <th>Filed</th>
+        <th>Type</th>
+        <th>Status</th>
+      </tr>
+      <tr>
+        <td>02-19-2022</td>
+        <td>Destruction of Property</td>
+        <td>Pending</td>
+      </tr>
+    </table>
+  </div>
+  <br/>
+  <h2>Feel Like You Can File on Your Own?</h2>
+  <h2>(You Can Always Change Your Mind Later)</h2>
+  <br/>
+  <button id="NewDocumentationButton" type="button">Start New Documentation</button> 
+  <br/>
+  <h2>Want to Talk to a Lawyer?</h2>
+  <button id="FindALawyerButton" type="button">Find a Lawyer</button>
+  <br/>
+</div>
