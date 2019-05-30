@@ -37,7 +37,7 @@ app.use(session({
 
 var router = express.Router();
 
-
+//log in and authenticate it
 app.post('/authenticate', function(req, res){
     console.log('post /authenticate');
     var username = req.body.username;
@@ -80,6 +80,8 @@ app.post('/authenticate', function(req, res){
 //////end authenticate
 
 
+
+//create a user
 app.get('/createUser',function(req,res){
   res.render('createUser');
 });
@@ -108,7 +110,7 @@ app.get('/createUser', function(req, res) {
 	// res.end();
 });
 
-
+//display user home page after log in
 app.get('/userMainPage', function(req, res) {
 	console.log('get /createUser');
   if (req.session.loggedin) {
@@ -123,6 +125,7 @@ app.get('/userMainPage', function(req, res) {
 });
 
 
+//question page after "ask a question"
 app.get('/questionMain', function(req, res) {
 	console.log('get /questionMain');
   if (req.session.loggedin) {
