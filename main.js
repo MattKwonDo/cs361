@@ -133,6 +133,14 @@ app.get('/questionMain', function(req, res) {
 	var context = {};
 	var mysql = req.app.get('mysql');
 	var sql = "SELECT category FROM QuestionAnswer GROUP BY category";
+	mysql.pool.query(sql, function(error, results, fields) {
+		if(error) {
+			console.log("Error")
+			res.write(JSON.stringify(error));
+			res.end();
+		} else {
+			context.categories = results;
+		}
         console.log('render /questionMain');
         res.render('questionMain', context);
   } else {
