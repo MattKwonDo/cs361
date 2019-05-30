@@ -21,8 +21,11 @@
             <div id="questionCategory">
                 <form id="findQuestionCategory">
                     <p>
-                        Category:
-                        <input type="text" name="username" size="15" maxlength="50" />
+                        Category: <select name="legalCategory">
+			{{#each category}}
+                        <option value="{{category}}"> {{category}}
+			</option>
+			</select>
 					<br>
                     <input type="submit" name="category" value="Find Category" />
 					<br><br>
