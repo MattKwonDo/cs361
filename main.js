@@ -70,15 +70,15 @@ app.post('/authenticate', function(req, res){
         });
 });
 
-app.get('/userMainPage', function(req, res) {
-	if (req.session.loggedin) {
-		res.send('hello, ' + req.session.username + '!');
-    console.log('hello, ' + req.session.username + '!');
-	} else {
-		res.send('log in, you must');
-    console.log('log in, you must');
-	}
-	res.end();
+//app.get('/userMainPage', function(req, res) {
+//	if (req.session.loggedin) {
+//		res.send('hello, ' + req.session.username + '!');
+//    console.log('hello, ' + req.session.username + '!');
+//	} else {
+//		res.send('log in, you must');
+//    console.log('log in, you must');
+//	}
+//	res.end();
 });
 
 //delete session
@@ -117,6 +117,22 @@ app.get('/createUser', function(req, res) {
 	}
 	// res.end();
 });
+
+
+app.get('/userMainPage', function(req, res) {
+	console.log('get /createUser');
+  if (req.session.loggedin) {
+    console.log('hello, ' + req.session.username + '!');
+    var context = {};
+        console.log('render /createUser');
+        res.render('userMainPage', context);
+  } else {
+		console.log('log in, you must');
+    res.redirect('/');
+	}
+});
+
+
 
 app.use(function(req,res){
   res.status(404);
