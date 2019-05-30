@@ -130,7 +130,9 @@ app.get('/questionMain', function(req, res) {
 	console.log('get /questionMain');
   if (req.session.loggedin) {
     console.log('hello, ' + req.session.username + '!');
-    var context = {};
+	var context = {};
+	var mysql = req.app.get('mysql');
+	var sql = "SELECT category FROM QuestionAnswer GROUP BY category";
         console.log('render /questionMain');
         res.render('questionMain', context);
   } else {
