@@ -15,12 +15,11 @@ module.exports = function(){
         });
 }
 
-  // When page loads, display all doctors
+  // When page loads, display all categories in drop down
   
   router.get('/', function(req, res){
         var callbackCount = 0;
         var context = {};
-        //context.jsscripts = ["deleteperson.js","filterpeople.js","searchpeople.js"];
         var mysql = req.app.get('mysql');
         getCategories(res, mysql, context, complete);
         function complete(){
@@ -32,8 +31,8 @@ module.exports = function(){
         }
     });
     
-    // When user submits a new doctor, add it to the database and refresh page to display new row
-    /*
+    // When user submits a new question, add it to the database and refresh page
+   
     router.post('/', function(req, res){       
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO Hosp_Doctor (Fname, Lname, License) VALUES (?,?,?);";
@@ -48,7 +47,7 @@ module.exports = function(){
             }
         });
 });
-  */  
+  
     
     return router;
 }();
