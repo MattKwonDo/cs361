@@ -11,7 +11,7 @@ app.use('/static', express.static('public'));
 app.set('view engine', 'handlebars');
 app.set('port', process.argv[2]);
 app.set('mysql', mysql);
-//app.use('/branch', require('./branch.js'));
+app.use('/questionMain', require('./questions.js'));
 //app.use('/department', require('./department.js'));
 //app.use('/doctor', require('./doctor.js'));
 //app.use('/doctor_branch', require('./doctor_branch.js'));
