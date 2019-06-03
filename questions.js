@@ -36,14 +36,14 @@ module.exports = function(){
     router.post('/', function(req, res){       
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO QnA (c_id, q_text) VALUES (?,?);";
-        var inserts = [req.body.Fname, req.body.Lname, req.body.License];
+        var inserts = [req.body.categoryId, req.body.userQuestion];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
                 console.log(JSON.stringify(error))
                 res.write(JSON.stringify(error));
                 res.end();
             }else{
-                res.redirect('/doctor');
+                res.redirect('/questionMain');
             }
         });
 });
