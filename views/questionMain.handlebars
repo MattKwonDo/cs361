@@ -21,11 +21,9 @@
     <form id="questionCategory" action="" method="">
         Category:
         <select name="categoryId">
-            {{#each category}}
-            <option value="{{categoryId}}"> </option>
-          {{#each categories}}
-            <option value="{{id}}">{{category}}</option>
-          {{/each}} -->
+          {{#each category}}
+            <option value="{{c_id}}">{{cname}}</option>
+          {{/each}}
         </select>
       <br><br>
       <textarea name="userQuestion" cols="75" rows="4">Enter Your Question Here...</textarea>
