@@ -10,7 +10,7 @@ module.exports = function(){
                 res.write(JSON.stringify(error));
                 res.end();
             }
-            context.categories  = results;
+            context.category  = results;
             complete();
         });
 }
@@ -22,18 +22,18 @@ module.exports = function(){
         var context = {};
         //context.jsscripts = ["deleteperson.js","filterpeople.js","searchpeople.js"];
         var mysql = req.app.get('mysql');
-        getDoctors(res, mysql, context, complete);
+        getCategories(res, mysql, context, complete);
         function complete(){
             callbackCount++;
             if(callbackCount >= 1){
-                res.render('doctor', context);
+                res.render('questionMain', context);
             }
 
         }
     });
     
     // When user submits a new doctor, add it to the database and refresh page to display new row
-    
+    /*
     router.post('/', function(req, res){       
         var mysql = req.app.get('mysql');
         var sql = "INSERT INTO Hosp_Doctor (Fname, Lname, License) VALUES (?,?,?);";
@@ -48,7 +48,7 @@ module.exports = function(){
             }
         });
 });
-    
+  */  
     
     return router;
 }();
