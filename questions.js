@@ -5,7 +5,7 @@ module.exports = function(){
   // Display categories for ask question page
   
     function getCategories(res, mysql, context, complete){
-        mysql.pool.query("SELECT cname FROM QuestionCategories;", function(error, results, fields){
+        mysql.pool.query("SELECT c_id, cname FROM QuestionCategories;", function(error, results, fields){
             if(error){
                 res.write(JSON.stringify(error));
                 res.end();
@@ -35,8 +35,8 @@ module.exports = function(){
    
     router.post('/', function(req, res){       
         var mysql = req.app.get('mysql');
-        var sql = "INSERT INTO QnA SET c_id=(SELECT c_id FROM QuestionCategories WHERE cname =?), q_text=?;";
-        //var sql = "INSERT INTO QnA (c_id, q_text) VALUES (?,?);";
+        //var sql = "INSERT INTO QnA SET c_id=(SELECT c_id FROM QuestionCategories WHERE cname =?), q_text=?;";
+        var sql = "INSERT INTO QnA (c_id, q_text) VALUES (?,?);";
         var inserts = [req.body.categoryId, req.body.userQuestion];
         sql = mysql.pool.query(sql,inserts,function(error, results, fields){
             if(error){
