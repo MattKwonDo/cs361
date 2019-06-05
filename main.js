@@ -101,31 +101,38 @@ app.post('/createUser', function(req, res){
     var phone = req.body.phone;
     var address = req.body.address;
 
-    var mysql = req.app.get('mysql');
-    var sql = "INSERT INTO UserInfo (username, password, email, phone, address) VALUES (?,?,?,?,?)";
-    var inserts = [username, password, email, phone, address];
-    mysql.pool.query(sql, inserts, function(error, results, fields){
-          if(error){
-              res.send('danger will robinson, pls enter pw or user');
-              console.log('danger will robinson, pls enter pw or user');
-              console.log(JSON.stringify(error));
+    if(password === password2){
+   	var mysql = req.app.get('mysql');
+    	var sql = "INSERT INTO UserInfo (username, password, email, phone, address) VALUES (?,?,?,?,?)";
+    	var inserts = [username, password, email, phone, address];
+   
+    
+	mysql.pool.query(sql, inserts, function(error, results, fields){
+        if(error){
+        	res.send('danger will robinson, pls enter pw or user');
+        	console.log('danger will robinson, pls enter pw or user');
+        	console.log(JSON.stringify(error));
               res.write(JSON.stringify(error));
               res.end();
-          }
-          else if (results.length > 0) {
-            req.session.loggedin = true;
-            req.session.username = username;
-            console.log("post successment");
-            console.log(JSON.stringify(results));
-            console.log('req.session: ');
-            console.log(req.session);
-            res.redirect('/userMainPage');
-          } else {
-            res.send('danger will robinson, wrong pw or user');
-            console.log('danger will robinson, wrong pw or user');
-          }
-          res.end();
-        });
+         }
+         else if (results.length > 0) {
+         req.session.loggedin = true;
+         req.session.username = username;
+         console.log("post successment");
+         console.log(JSON.stringify(results));
+         console.log('req.session: ');
+         console.log(req.session);
+         res.redirect('/userMainPage');
+         } else {
+           	res.send('danger will robinson, wrong pw or user');
+           	console.log('danger will robinson, wrong pw or user');
+         	}
+         	res.end();
+      	  });
+	}
+    else {
+	console.log('passwords are different');    
+    }
 });
 
 //end create user
