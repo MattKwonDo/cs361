@@ -92,8 +92,8 @@ app.get('/createUser', function(req, res) {
    
 });
 
-app.post('/createUser', function(req, res){
-    console.log('post /createUser');
+app.post('/createNewUser', function(req, res){
+    console.log('post /createNewUser');
     var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
