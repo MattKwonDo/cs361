@@ -141,7 +141,7 @@ app.get('/updateUser', function(req, res) {
     	var context = {};
     
         console.log('render /updateUser');
-        res.render('createUser', context);
+        res.render('updateUser', context);
    
 });
 
