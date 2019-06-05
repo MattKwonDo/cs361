@@ -83,11 +83,13 @@ app.post('/authenticate', function(req, res){
 
 app.get('/createUser', function(req, res) {
 	console.log('get /createUser');
-	console.log('log in, you must');
-   	 // res.send('log in, you must');
-    	res.redirect('/');
-
-	// res.end();
+    	console.log('hello, ' + req.session.username + '!');
+    
+    	var context = {};
+    
+        console.log('render /createUser');
+        res.render('createUser', context);
+   
 });
 
 //display user home page after log in
