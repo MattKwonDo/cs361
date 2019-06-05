@@ -83,23 +83,10 @@ app.post('/authenticate', function(req, res){
 
 app.get('/createUser', function(req, res) {
 	console.log('get /createUser');
-  if (req.session.loggedin) {
-		// res.send('hello, ' + req.session.username + '!');
-    console.log('hello, ' + req.session.username + '!');
-    // var callbackCount = 0;
-    var context = {};
-    // function complete() {
-    //   callbackCount++;
-    //   if (callbackCount >= 1) {
-        console.log('render /createUser');
-        res.render('createUser', context);
-    //   }
-    // }
-  } else {
-		console.log('log in, you must');
-    // res.send('log in, you must');
-    res.redirect('/');
-	}
+	console.log('log in, you must');
+   	 // res.send('log in, you must');
+    	res.redirect('/');
+
 	// res.end();
 });
 
