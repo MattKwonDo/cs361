@@ -79,7 +79,7 @@ app.post('/authenticate', function(req, res){
 
 //////end authenticate
 
-
+//begin create user
 
 app.get('/createUser', function(req, res) {
 	console.log('get /createUser');
@@ -91,6 +91,45 @@ app.get('/createUser', function(req, res) {
         res.render('createUser', context);
    
 });
+
+app.post('/createUser', function(req, res){
+    console.log('post /createUser');
+    var username = req.body.username;
+    var password = req.body.password;
+    var password2 = req.body.password2;
+    var Email = req.body.Email;
+    var Phone = req.body.Phone;
+    var Address = req.body.Address;
+
+    var mysql = req.app.get('mysql');
+    var sql = "INSERT INTO UserInfo (username, password, password2, Email, Phone, Address) VALUES (?,?,?,?,?,?)";
+    var inserts = [username, password, password2, Email, Phone, Address];
+    mysql.pool.query(sql, inserts, function(error, results, fields){
+          if(error){
+              res.send('danger will robinson, pls enter pw or user');
+              console.log('danger will robinson, pls enter pw or user');
+              console.log(JSON.stringify(error));
+              res.write(JSON.stringify(error));
+              res.end();
+          }
+          else if (results.length > 0) {
+            req.session.loggedin = true;
+            req.session.username = username;
+            console.log("post successment");
+            console.log(JSON.stringify(results));
+            console.log('req.session: ');
+            console.log(req.session);
+            res.redirect('/userMainPage');
+          } else {
+            res.send('danger will robinson, wrong pw or user');
+            console.log('danger will robinson, wrong pw or user');
+          }
+          res.end();
+        });
+});
+
+//end create user
+
 
 //display user home page after log in
 app.get('/userMainPage', function(req, res) {
