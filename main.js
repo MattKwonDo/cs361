@@ -158,8 +158,8 @@ app.post('/updateCurrentUser', function(req, res){
 	
     if(password === password2){
    	var mysql = req.app.get('mysql');
-    	var sql = "UPDATE UserInfo SET username=?, password=?, email=?, phone=?, address=?";
-    	var inserts = [username, password, email, phone, address];
+    	var sql = "UPDATE UserInfo SET password=?, email=?, phone=?, address=? WHERE username=?";
+    	var inserts = [password, email, phone, address, username];
    
     	console.log('passwords are equal!');
 	    
