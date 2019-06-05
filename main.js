@@ -115,20 +115,12 @@ app.post('/createNewUser', function(req, res){
         	res.send('danger will robinson, pls enter pw or user');
         	console.log('danger will robinson, pls enter pw or user');
         	console.log(JSON.stringify(error));
-              res.write(JSON.stringify(error));
-              res.end();
+              	res.write(JSON.stringify(error));
+             	res.end();
          }
-         else if (results.length > 0) {
-         req.session.loggedin = true;
-         req.session.username = username;
-         console.log("post successment");
-         console.log(JSON.stringify(results));
-         console.log('req.session: ');
-         console.log(req.session);
-         res.redirect('/userMainPage');
-         } else {
-           	res.send('danger will robinson, wrong pw or user');
-           	console.log('danger will robinson, wrong pw or user');
+         else {
+           	console.log('account created');
+		res.redirect('/');
          	}
          	res.end();
       	  });
