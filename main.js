@@ -97,13 +97,13 @@ app.post('/createUser', function(req, res){
     var username = req.body.username;
     var password = req.body.password;
     var password2 = req.body.password2;
-    var Email = req.body.Email;
-    var Phone = req.body.Phone;
-    var Address = req.body.Address;
+    var email = req.body.email;
+    var phone = req.body.phone;
+    var address = req.body.address;
 
     var mysql = req.app.get('mysql');
-    var sql = "INSERT INTO UserInfo (username, password, password2, Email, Phone, Address) VALUES (?,?,?,?,?,?)";
-    var inserts = [username, password, password2, Email, Phone, Address];
+    var sql = "INSERT INTO UserInfo (username, password, email, phone, address) VALUES (?,?,?,?,?)";
+    var inserts = [username, password, email, phone, address];
     mysql.pool.query(sql, inserts, function(error, results, fields){
           if(error){
               res.send('danger will robinson, pls enter pw or user');
