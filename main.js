@@ -148,6 +148,7 @@ app.get('/updateUser', function(req, res) {
 app.post('/updateCurrentUser', function(req, res){
     console.log('post /updateCurrentUser');
     var username = req.body.username;
+    var oldPassword = req.body.oldPassword;
     var password = req.body.password;
     var password2 = req.body.password2;
     var email = req.body.email;
@@ -155,11 +156,11 @@ app.post('/updateCurrentUser', function(req, res){
     var address = req.body.address;
 
     console.log('password is ' + req.body.password);
-	
+    	
     if(password === password2){
    	var mysql = req.app.get('mysql');
-    	var sql = "UPDATE UserInfo SET password=?, email=?, phone=?, address=? WHERE username=?";
-    	var inserts = [password, email, phone, address, username];
+    	var sql = "UPDATE UserInfo SET password=?, email=?, phone=?, address=? WHERE username=? AND password=?";
+    	var inserts = [password, email, phone, address, username, oldPassword];
    
     	console.log('passwords are equal!');
 	    
