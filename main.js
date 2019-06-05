@@ -126,7 +126,7 @@ app.post('/createNewUser', function(req, res){
       	  });
 	}
     else {
-	$('#passwordMessage').text('Please ensure you have entered the same password.');
+	//$('#passwordMessage').text('Please ensure you have entered the same password.');
 	console.log('passwords are different');    
     }
 });
