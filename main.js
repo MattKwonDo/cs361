@@ -101,12 +101,15 @@ app.post('/createUser', function(req, res){
     var phone = req.body.phone;
     var address = req.body.address;
 
+    console.log('password is ' + req.body.password);
+	
     if(password === password2){
    	var mysql = req.app.get('mysql');
     	var sql = "INSERT INTO UserInfo (username, password, email, phone, address) VALUES (?,?,?,?,?)";
     	var inserts = [username, password, email, phone, address];
    
-    
+    	console.log('passwords are equal!');
+	    
 	mysql.pool.query(sql, inserts, function(error, results, fields){
         if(error){
         	res.send('danger will robinson, pls enter pw or user');
