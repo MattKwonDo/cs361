@@ -132,6 +132,59 @@ app.post('/createNewUser', function(req, res){
 
 //end create user
 
+//update user start
+
+app.get('/updateUser', function(req, res) {
+	console.log('get /updateUser');
+    	console.log('hello, ' + req.session.username + '!');
+    
+    	var context = {};
+    
+        console.log('render /updateUser');
+        res.render('createUser', context);
+   
+});
+
+app.post('/updateCurrentUser', function(req, res){
+    console.log('post /updateCurrentUser');
+    var username = req.body.username;
+    var password = req.body.password;
+    var password2 = req.body.password2;
+    var email = req.body.email;
+    var phone = req.body.phone;
+    var address = req.body.address;
+
+    console.log('password is ' + req.body.password);
+	
+    if(password === password2){
+   	var mysql = req.app.get('mysql');
+    	var sql = "UPDATE UserInfo SET username=?, password=?, email=?, phone=?, address=?";
+    	var inserts = [username, password, email, phone, address];
+   
+    	console.log('passwords are equal!');
+	    
+	mysql.pool.query(sql, inserts, function(error, results, fields){
+        if(error){
+        	res.send('danger will robinson, pls enter pw or user');
+        	console.log('danger will robinson, pls enter pw or user');
+        	console.log(JSON.stringify(error));
+              	res.write(JSON.stringify(error));
+             	res.end();
+         }
+         else {
+           	console.log('account created');
+		res.redirect('/');
+         	}
+         	res.end();
+      	  });
+	}
+    else {
+	console.log('passwords are different');    
+    }
+});
+
+//update user end
+
 
 //display user home page after log in
 app.get('/userMainPage', function(req, res) {
