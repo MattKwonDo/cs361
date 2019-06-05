@@ -92,8 +92,6 @@ app.get('/createUser', function(req, res) {
    
 });
 
-$('#passwordMessage').text('Please ensure you have entered the same password.');
-
 app.post('/createNewUser', function(req, res){
     console.log('post /createNewUser');
     var username = req.body.username;
@@ -128,6 +126,7 @@ app.post('/createNewUser', function(req, res){
       	  });
 	}
     else {
+	$('#passwordMessage').text('Please ensure you have entered the same password.');
 	console.log('passwords are different');    
     }
 });
