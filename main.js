@@ -112,7 +112,7 @@ app.post('/createNewUser', function(req, res){
 	
     if(password === password2){
    	var mysql = req.app.get('mysql');
-    	var sql = "INSERT INTO UserInfo (username, password, email, phone, address) VALUES (?,?,?,?,?)";
+    	var sql = "INSERT INTO UserInfo (username, password, email, phone, address, UserType) VALUES (?,?,?,?,?,1)";
     	var inserts = [username, password, email, phone, address];
    
     	console.log('passwords are equal!');
