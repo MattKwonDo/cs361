@@ -208,6 +208,20 @@ app.get('/userMainPage', function(req, res) {
 	}
 });
 
+// display lawyer home page after a lawyer logs in
+
+app.get('/lawyerMainPage', function(req, res) {
+	console.log('get /createUser');
+  if (req.session.loggedin) {
+    console.log('hello, ' + req.session.username + '!');
+    var context = {};
+        console.log('render /createUser');
+        res.render('lawyerMainPage', context);
+  } else {
+		console.log('log in, you must');
+    res.redirect('/');
+	}
+});
 
 //question page after "ask a question"
 app.get('/questionMain', function(req, res) {
@@ -235,6 +249,7 @@ app.get('/questionMain', function(req, res) {
   //   res.redirect('/');
 	// }
 });
+
 
 
 router.get('/questionMain/filter/:category', function(req, res) {
