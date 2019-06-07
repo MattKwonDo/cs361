@@ -66,8 +66,8 @@ app.post('/authenticate', function(req, res){
 		res.redirect('/userMainPage');
 	    }
             else if (results[0].UserType == 2) {
-		//res.redirect('/lawyerMainPage');
-		res.send('Lawyer Page Goes Here');
+		res.redirect('/lawyerMainPage');
+		//res.send('Lawyer Page Goes Here');
 	    }
           } else {
             res.send('danger will robinson, wrong pw or user');
