@@ -62,10 +62,10 @@ app.post('/authenticate', function(req, res){
             console.log('req.session: ');
             console.log(req.session);
 		  
-	    if (results[0].UserType = 1){
+	    if (results[0].UserType == 1){
 		res.redirect('/userMainPage');
 	    }
-            else if (results[0].UserType = 2) {
+            else if (results[0].UserType == 2) {
 		res.redirect('/lawyerMainPage');
 	    }
           } else {
